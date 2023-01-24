@@ -1,19 +1,24 @@
 import React from "react"
-import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 // ========================================================================
-import { getContacts, getFilteredContacts } from 'redux/selectors';
-import { deleteContact } from "redux/contactSlice";
+import { getFilter, getFilteredContact } from 'redux/selectors';
+import { deleteContact, setFilteredContacts } from 'redux/contactSlice';
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const ContactList = () => {
     const dispatch = useDispatch();
-    const contacts = useSelector(getContacts);
-    const filteredContacts = useSelector(getFilteredContacts);
+    const filter = useSelector(getFilter);
+    const filteredContacts = useSelector(getFilteredContact)
     
+    useEffect(() => {
+      dispatch(setFilteredContacts(filter));
+    }, [filter, dispatch]);
+
+    console.log();
     return (
       <ul className={css.contactList}>
-        {contacts.map(contact => {
+        {filteredContacts.map(contact => {
           const handleDelete = () => dispatch(deleteContact(contact.id));
           let markup = (
             <li key={contact.id} className={css.contactItem}>
@@ -34,12 +39,6 @@ const ContactList = () => {
         })}
       </ul>
     );
-}
-
-
-ContactList.propTypes = {
-    list: PropTypes.array.isRequired,
-    deleteContact: PropTypes.func.isRequired
 }
 
 export default ContactList;

@@ -1,6 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const contactInitialState = [
+const contactInitialState = {
+    contacts: [
     {
         "name": "Naruto",
         "number": "+123132",
@@ -26,15 +27,18 @@ const contactInitialState = [
         "number": "+555555",
         "id": "Q_KkMWwx1biQGb7zspY5t"
     }
-]
+    ],
+    filter: "",
+    filteredContacts: []
+}
 
 const contactSlice = createSlice({
-    name: "contacts",
+    name: "phonebook",
     initialState: contactInitialState,
     reducers: {
         addContact: {
             reducer(state, action) {
-                state.push(action.payload);
+                state.contacts.push(action.payload);
             },
             prepare(name, number) {
                 return {
@@ -47,11 +51,27 @@ const contactSlice = createSlice({
             }
         },
         deleteContact(state, action) {
-            const index = state.findIndex(contact => contact.id === action.payload);
-            state.splice(index, 1);
+            const index = state.contacts.findIndex(contact => contact.id === action.payload);
+            state.contacts.splice(index, 1);
+        },
+        setFilter: {
+            reducer(state, action) {
+                state.filter = action.payload;
+            }
+        },
+        setFilteredContacts: (state, action) => {
+            const filteredContacts = state.contacts.filter(contact =>
+                contact.name.toLowerCase().includes(action.payload.toLowerCase())
+            );
+            return {
+                ...state,
+                filteredContacts:
+                    action.payload.length > 0 ? filteredContacts : [...state.contacts]
+
+            };
         },
     }
 })
 
-export const { addContact, deleteContact } = contactSlice.actions;
+export const { addContact, setFilter, deleteContact, setFilteredContacts } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;
