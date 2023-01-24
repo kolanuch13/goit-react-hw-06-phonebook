@@ -2,31 +2,31 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const contactInitialState = {
     contacts: [
-    {
-        "name": "Naruto",
-        "number": "+123132",
-        "id": "KdyrLjKaW3EtLDIGH2gjg"
-    },
-    {
-        "name": "Sakura",
-        "number": "+456465",
-        "id": "bvQGrnEPiVxNrH8KRzwqv"
-    },
-    {
-        "name": "Sasuke",
-        "number": "+789789",
-        "id": "n2HTpK_yNcO-oH-pji6ZE"
-    },
-    {
-        "name": "Kakashi",
-        "number": "+111111",
-        "id": "b3ma96p-LBJw_XyA5DJy1"
-    },
-    {
-        "name": "Yamato",
-        "number": "+555555",
-        "id": "Q_KkMWwx1biQGb7zspY5t"
-    }
+        {
+            "name": "Naruto",
+            "number": "+123132",
+            "id": "KdyrLjKaW3EtLDIGH2gjg"
+        },
+        {
+            "name": "Sakura",
+            "number": "+456465",
+            "id": "bvQGrnEPiVxNrH8KRzwqv"
+        },
+        {
+            "name": "Sasuke",
+            "number": "+789789",
+            "id": "n2HTpK_yNcO-oH-pji6ZE"
+        },
+        {
+            "name": "Kakashi",
+            "number": "+111111",
+            "id": "b3ma96p-LBJw_XyA5DJy1"
+        },
+        {
+            "name": "Yamato",
+            "number": "+555555",
+            "id": "Q_KkMWwx1biQGb7zspY5t"
+        }
     ],
     filter: ""
 }
