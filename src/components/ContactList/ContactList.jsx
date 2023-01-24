@@ -1,19 +1,24 @@
 import React from "react"
 import css from './ContactList.module.css';
 // ========================================================================
-import { getFilter, getContacts } from 'redux/selectors';
-import { deleteContact, setFilteredContacts } from 'redux/contactSlice';
+import { getFilter, getContacts } from "redux/selectors";
+import { deleteContact } from 'redux/contactSlice';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ContactList = () => {
     const dispatch = useDispatch();
+    const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
-    const filteredContacts = useSelector(getContacts)
+    const [filteredContacts, setFilteredContacts] = useState([]);
     
     useEffect(() => {
-      dispatch(setFilteredContacts(filter));
-    }, [filter, dispatch]);
+      setFilteredContacts(
+        contacts.filter(contact =>
+          contact.name.toLowerCase().includes(filter.toLowerCase())
+        )
+      );
+    }, [filter, contacts]);
 
     return (
       <ul className={css.contactList}>

@@ -1,19 +1,26 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactSlice';
+import { getContacts } from 'redux/selectors';
 import css from './ContactForm.module.css';
 
 const ContactForm =  ({ error }) => {
     const dispatch = useDispatch();
+    const contacts = useSelector(getContacts);
 
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
-        dispatch(
-          addContact(
-            form.elements.name.value,
-            form.elements.number.value,
-          )
-        );
+        const require = contacts.filter(contact => contact.name.toLowerCase() === form.elements.name.value);
+        if (require.length === 0) {
+            dispatch(
+                addContact(
+                    form.elements.name.value,
+                    form.elements.number.value,
+                )
+            );      
+        } else {
+            alert(`${form.elements.name.value} already is on contacts.`);
+        }
         form.reset();
     }
     return <div>
