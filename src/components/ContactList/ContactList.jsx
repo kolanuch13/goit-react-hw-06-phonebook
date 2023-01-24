@@ -13,9 +13,8 @@ const ContactList = () => {
     
     useEffect(() => {
       dispatch(setFilteredContacts(filter));
-    }, [filteredContacts, filter, dispatch]);
+    }, [filter, dispatch]);
 
-    console.log();
     return (
       <ul className={css.contactList}>
         {filteredContacts.map(contact => {
