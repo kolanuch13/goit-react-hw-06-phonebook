@@ -28,8 +28,7 @@ const contactInitialState = {
         "id": "Q_KkMWwx1biQGb7zspY5t"
     }
     ],
-    filter: "",
-    filteredContacts: []
+    filter: ""
 }
 
 const contactSlice = createSlice({
@@ -60,13 +59,13 @@ const contactSlice = createSlice({
             }
         },
         setFilteredContacts: (state, action) => {
-            const filteredContacts = state.contacts.filter(contact =>
+            const contacts = state.contacts.filter(contact =>
                 contact.name.toLowerCase().includes(action.payload.toLowerCase())
             );
             return {
                 ...state,
-                filteredContacts:
-                    action.payload.length > 0 ? filteredContacts : [...state.contacts]
+                contacts:
+                    action.payload.length > 0 ? contacts : [...state.contacts]
 
             };
         },
